@@ -16,9 +16,8 @@ class EPICGAMETOBE_API AEnemyCharacter : public ABaseCharacter, public IEnemyInt
 	GENERATED_BODY()
 
 public:
+	AEnemyCharacter();
+	
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-
-	UPROPERTY(BlueprintReadOnly)
-	bool bHighlighted = false;
 };

@@ -1,14 +1,24 @@
 // Copyright Alex Iancu
 
-
 #include "Character/EnemyCharacter.h"
+
+#include "EpicGameToBe/EpicGameToBe.h"
+
+AEnemyCharacter::AEnemyCharacter()
+{
+	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+}
 
 void AEnemyCharacter::HighlightActor()
 {
-	bHighlighted = true;
+	GetMesh()->SetRenderCustomDepth(true);
+	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
+	Weapon->SetRenderCustomDepth(true);
+	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
 void AEnemyCharacter::UnHighlightActor()
 {
-	bHighlighted = false;
+	Weapon->SetRenderCustomDepth(false);
+	GetMesh()->SetRenderCustomDepth(false);
 }
