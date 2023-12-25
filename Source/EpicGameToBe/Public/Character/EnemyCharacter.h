@@ -17,6 +17,8 @@ class EPICGAMETOBE_API AEnemyCharacter : public ABaseCharacter, public IEnemyInt
 
 public:
 	virtual void HighlightActor() override;
-
 	virtual void UnHighlightActor() override;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bHighlighted = false;
 };

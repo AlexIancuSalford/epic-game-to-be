@@ -10,6 +10,7 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IEnemyInterface;
 
 /**
  * 
@@ -21,6 +22,7 @@ class EPICGAMETOBE_API AMyPlayerController : public APlayerController
 	
 public:
 	AMyPlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -28,10 +30,14 @@ protected:
 
 private:
 	void Move(const FInputActionValue& InputActionValue);
+	void CursorTrace();
 	
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputMappingContext> InputContext;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
+
+	IEnemyInterface* LastActor;
+	IEnemyInterface* ThisActor;
 };

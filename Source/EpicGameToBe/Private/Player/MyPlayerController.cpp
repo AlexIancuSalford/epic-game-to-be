@@ -5,10 +5,18 @@
 
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/EnemyInterface.h"
 
 AMyPlayerController::AMyPlayerController()
 {
 	bReplicates = true;
+}
+
+void AMyPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
 }
 
 void AMyPlayerController::BeginPlay()
@@ -52,5 +60,27 @@ void AMyPlayerController::Move(const FInputActionValue& InputActionValue)
 	{
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+	}
+}
+
+void AMyPlayerController::CursorTrace()
+{
+	FHitResult HitResult;
+	GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
+	if (!HitResult.bBlockingHit) { return; }
+
+	LastActor = ThisActor;
+	ThisActor = Cast<IEnemyInterface>(HitResult.GetActor());
+	
+	if (LastActor != ThisActor)
+	{
+		if (LastActor != nullptr)
+		{
+			LastActor->UnHighlightActor();
+		}
+		if (ThisActor != nullptr)
+		{
+			ThisActor->HighlightActor();
+		}
 	}
 }
