@@ -12,6 +12,11 @@ ABaseCharacter::ABaseCharacter()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
