@@ -3,11 +3,14 @@
 
 #include "AbilitySystem/AttributeSetBase.h"
 
-#include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
 UAttributeSetBase::UAttributeSetBase()
 {
+	InitHealth(100.f);
+	InitMaxHealth(150.f);
+	InitMana(200.f);
+	InitMaxMana(300.f);
 }
 
 void UAttributeSetBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
